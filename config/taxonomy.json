@@ -1,0 +1,115 @@
+{
+ "version": "v1",
+ "n_intents": 10,
+ "locked": "2026-09-09",
+ "intents": [
+  {
+   "intent_id": "delay_status",
+   "name": "Delay status",
+   "definition": "Customer asks whether/how much their train is delayed, or reports a delay seeking information.",
+   "inclusion_criteria": "Questions about delay length, arrival impact, reasons for lateness.",
+   "exclusion_criteria": "Cancellations go to cancellation_status; pre-travel will-it-run goes to live_departure_info.",
+   "confusable_intents": [
+    "live_departure_info",
+    "cancellation_status"
+   ]
+  },
+  {
+   "intent_id": "cancellation_status",
+   "name": "Cancellation status",
+   "definition": "Customer asks whether a service is cancelled or reports a cancellation seeking confirmation/next steps.",
+   "inclusion_criteria": "Is it cancelled / why cancelled / train disappeared from boards.",
+   "exclusion_criteria": "Rebooking questions go to rebooking_alternative_route; money questions go to refund_delay_repay.",
+   "confusable_intents": [
+    "delay_status",
+    "rebooking_alternative_route"
+   ]
+  },
+  {
+   "intent_id": "live_departure_info",
+   "name": "Live departure information",
+   "definition": "Pre-travel or general timetable/service questions: will it run, on time, platform, engineering works, strike effects.",
+   "inclusion_criteria": "Running today, on-time checks, platform, planned works, strikes, timetable queries.",
+   "exclusion_criteria": "Specific delay duration goes to delay_status; confirmed cancellations go to cancellation_status.",
+   "confusable_intents": [
+    "delay_status",
+    "cancellation_status"
+   ]
+  },
+  {
+   "intent_id": "rebooking_alternative_route",
+   "name": "Rebooking / alternative route",
+   "definition": "Customer wants to change trains/times/routes or find another way to get somewhere (replacement buses included).",
+   "inclusion_criteria": "Which train instead, next service, replacement transport, rerouting.",
+   "exclusion_criteria": "Using the SAME ticket on another operator goes to ticket_acceptance.",
+   "confusable_intents": [
+    "ticket_acceptance",
+    "cancellation_status"
+   ]
+  },
+  {
+   "intent_id": "ticket_acceptance",
+   "name": "Ticket acceptance",
+   "definition": "Can I use my existing ticket on another service, operator, route or time without buying again.",
+   "inclusion_criteria": "Cross-operator validity, ticket restrictions, peak/off-peak validity.",
+   "exclusion_criteria": "Changing the booking itself goes to rebooking_alternative_route.",
+   "confusable_intents": [
+    "rebooking_alternative_route",
+    "refund_delay_repay"
+   ]
+  },
+  {
+   "intent_id": "refund_delay_repay",
+   "name": "Refund / Delay Repay",
+   "definition": "Money back: Delay Repay claims, refunds for cancelled/unused tickets, compensation.",
+   "inclusion_criteria": "How to claim, eligibility, refund routing (incl. third-party sellers).",
+   "exclusion_criteria": "Changing tickets goes to rebooking; booking problems go to booking_ticket_issue.",
+   "confusable_intents": [
+    "booking_ticket_issue",
+    "ticket_acceptance"
+   ]
+  },
+  {
+   "intent_id": "booking_ticket_issue",
+   "name": "Booking / ticket issue",
+   "definition": "Buying, booking references, collection, seat reservations, advance tickets, upgrades for purchase, e-tickets, travel policy (bikes, luggage).",
+   "inclusion_criteria": "Can't collect, wrong reference, missing reservation, upgrade purchase, app/website booking, policy questions.",
+   "exclusion_criteria": "Refunds go to refund_delay_repay; using ticket elsewhere goes to ticket_acceptance.",
+   "confusable_intents": [
+    "refund_delay_repay",
+    "ticket_acceptance"
+   ]
+  },
+  {
+   "intent_id": "lost_property",
+   "name": "Lost property",
+   "definition": "Items left, lost or found on trains or at stations.",
+   "inclusion_criteria": "Left bag/phone/coat, lost-property office contact, found items.",
+   "exclusion_criteria": "Complaints about staff handling go to general_feedback unless the ask is finding the item.",
+   "confusable_intents": [
+    "general_feedback"
+   ]
+  },
+  {
+   "intent_id": "onboard_experience",
+   "name": "Onboard / station experience",
+   "definition": "Specific problem with the journey environment: wifi, food, cleanliness, staff conduct, comfort, facilities, lounge.",
+   "inclusion_criteria": "Wifi down, no food, dirty carriage, staff behavior, seat comfort, lounge access/facilities.",
+   "exclusion_criteria": "Pure venting without a specific problem goes to general_feedback.",
+   "confusable_intents": [
+    "general_feedback"
+   ]
+  },
+  {
+   "intent_id": "general_feedback",
+   "name": "General feedback (praise / venting)",
+   "definition": "Praise, thanks, or venting with NO specific actionable request \u2014 including sarcastic 'thanks'.",
+   "inclusion_criteria": "Thank-yous, compliments, pure complaints, sarcasm, banter with staff.",
+   "exclusion_criteria": "Any message containing a specific question goes to that intent (tie-break: specific question always wins).",
+   "confusable_intents": [
+    "onboard_experience",
+    "delay_status"
+   ]
+  }
+ ]
+}
