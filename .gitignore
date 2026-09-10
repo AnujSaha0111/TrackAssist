@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.pem
+credentials*
+secrets*
+
+# Large / local data
+*.csv.gz
+raw_datasets/
+model_caches/
+*.tmp
+*.log
+
+# Runtime-generated agent outputs and scripts/evaluate_agent.py
+artifacts/agent_results.jsonl
+artifacts/agent_aggregates.json
