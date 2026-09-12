@@ -45,7 +45,7 @@ Safety validation (failures escalate, never silently repaired)
 ## Evaluation
 
 - **Golden set** (`artifacts/evaluation/golden_labels.csv`): 200 hand-adjudicated customer messages with primary/secondary intent labels, sampled across months, thread sizes and intents with leakage guards (unique dyads/customers/targets). Reserved strictly for evaluation.
-- **Response set** (`artifacts/examples/response_eval_cases.jsonl`): 180 separate non-golden cases with grounded evidence for answer-handling study. No human annotations exist yet, so only automated validator/escalation diagnostics are reported — never presented as human quality judgments.
+- **Response set** (`artifacts/examples/response_eval_cases.jsonl`): 180 separate non-golden cases with grounded evidence for answer-handling study. No human annotations exist yet, so only automated validator/escalation diagnostics are reported - never presented as human quality judgments.
 
 ## Results
 
@@ -57,7 +57,7 @@ Safety validation (failures escalate, never silently repaired)
 | Semantic (MiniLM) | 0.670 | 0.6605 |
 | Hybrid (word+char + MiniLM) | **0.690** | **0.6777** |
 
-All on the frozen n=200 golden set (CIs overlap — ranking is suggestive, not proven). Strict customer-overlap reruns change nothing (Δ≈0). Retrieval Hit@3 ≈ 0.77–0.78 (proxy agreement with weak labels, not human relevance). Full numbers: `artifacts/evaluation/classification_results.json`.
+All on the frozen n=200 golden set (CIs overlap - ranking is suggestive, not proven). Strict customer-overlap reruns change nothing (Δ≈0). Retrieval Hit@3 ≈ 0.77–0.78 (proxy agreement with weak labels, not human relevance). Full numbers: `artifacts/evaluation/classification_results.json`.
 
 ## Intent Taxonomy
 
@@ -76,15 +76,15 @@ All on the frozen n=200 golden set (CIs overlap — ranking is suggestive, not p
 
 ## Historical Grounding
 
-TrackAssist uses a derived VirginTrains support corpus from the Customer Support on Twitter dataset: 3,985 VirginTrains dyads (`data/corpus.jsonl`, derived — raw 500MB CSV not shipped) with customer turns + brand replies. Retrieval returns dyads; the gate rejects same-dyad/customer matches, identifier-bearing replies, booking-specific and non-generalizable event content and action-less chatter, while flagging URLs, event periods, stale content and numeric artifacts. Historical evidence is never proof of current policy - all corpus content is from 2017.
+TrackAssist uses a derived VirginTrains support corpus from the Customer Support on Twitter dataset: 3,985 VirginTrains dyads (`data/corpus.jsonl`, derived - raw 500MB CSV not shipped) with customer turns + brand replies. Retrieval returns dyads; the gate rejects same-dyad/customer matches, identifier-bearing replies, booking-specific and non-generalizable event content and action-less chatter, while flagging URLs, event periods, stale content and numeric artifacts. Historical evidence is never proof of current policy - all corpus content is from 2017.
 
 ## Escalation
 
-Reason-coded, deterministic: NO_EVIDENCE, INSUFFICIENT_APPLICABLE_EVIDENCE, CONFLICTING_EVIDENCE, LOW_INTENT_CONFIDENCE, EVENT_TIME_SENSITIVE, VALIDATION_FAILED (NONE for auto-handle). The current conservative policy escalates all 180 evaluated response cases — that is safety behavior under a strict gate, not a success metric. Every escalation carries a code and a human-readable reason.
+Reason-coded, deterministic: NO_EVIDENCE, INSUFFICIENT_APPLICABLE_EVIDENCE, CONFLICTING_EVIDENCE, LOW_INTENT_CONFIDENCE, EVENT_TIME_SENSITIVE, VALIDATION_FAILED (NONE for auto-handle). The current conservative policy escalates all 180 evaluated response cases - that is safety behavior under a strict gate, not a success metric. Every escalation carries a code and a human-readable reason.
 
 ## Failure Analysis
 
-Top modes (real evaluation rows, details in REPORT §8):
+Top modes (real evaluation rows):
 1. Feedback/onboard tone boundary (sarcasm, venting, praise).
 2. Question-shaped chatter read as status requests (and reverse).
 3. Seat/reservation vocabulary shared by onboard and booking.
@@ -98,16 +98,12 @@ n=200 with overlapping variant intervals; rare intents unstable (delay 8, accept
 
 ## What Is Misleading About the Headline Number?
 
-69.0% is intent-label agreement on 200 curated messages — not the share of customers receiving good answers. Intervals overlap all variants; rare classes swing on 1–2 examples; training labels are noisy keyword rules; dyad-overlap sensitivity is ~zero but author-style leakage can't be excluded; response quality is unmeasured. See REPORT §9.
-
-## What I Would Do With One More Week
-
-Blind-human annotation rounds; calibration of the escalation threshold on human data; validity-syntax and established-state features; a capable instruction model under the same frozen validators; a live-policy grounding source. Details in REPORT §10.
+69.0% is intent-label agreement on 200 curated messages — not the share of customers receiving good answers. Intervals overlap all variants; rare classes swing on 1–2 examples; training labels are noisy keyword rules; dyad-overlap sensitivity is ~zero but author-style leakage can't be excluded; response quality is unmeasured.
 
 ## Sources
 
-- Customer Support on Twitter, Kaggle   (`thoughtvector/customer-support-on-twitter`) — primary data; subsampled   per the assignment. Download separately if rebuilding the corpus; not required to run this package.
-- Banking77 (Hugging Face `PolyAI/banking77`) — intent-exploration reference only; never merged; not shipped.
-- `sentence-transformers` + `all-MiniLM-L6-v2` — frozen retrieval representation and one classifier variant (no fine-tuning).
+- Customer Support on Twitter, Kaggle (`thoughtvector/customer-support-on-twitter`) - primary data; subsampled per the assignment. Download separately if rebuilding the corpus; not required to run this package.
+- Banking77 (Hugging Face `PolyAI/banking77`) - intent-exploration reference only; never merged; not shipped.
+- `sentence-transformers` + `all-MiniLM-L6-v2` - frozen retrieval representation and one classifier variant (no fine-tuning).
 - Qwen2.5-0.5B-Instruct (Qwen) — evaluated once as a response generator, found inadequate, excluded from the agent; documented in REPORT.
 - scikit-learn (TF-IDF, logistic regression, metrics), SciPy (sparse matrices), PyTorch (CPU inference), transformers (model loading). All application code in `src/` and `scripts/` is original.
