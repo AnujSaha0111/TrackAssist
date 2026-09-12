@@ -104,21 +104,6 @@ n=200 with overlapping variant intervals; rare intents unstable (delay 8, accept
 
 Blind-human annotation rounds; calibration of the escalation threshold on human data; validity-syntax and established-state features; a capable instruction model under the same frozen validators; a live-policy grounding source. Details in REPORT §10.
 
-## Repository Structure
-
-```text
-README.md  REPORT.md  requirements.txt  .gitignore  LICENSE
-src/            classifier, retrieval, grounding, response,
-                policy, validation, leakage guards, text inputs
-scripts/        run_agent, evaluate_classifier, evaluate_agent
-tests/          policy, grounding, package/headline/agent checks
-config/         taxonomy.json (locked 10 intents)
-artifacts/      models/ (hybrid classifier + TF-IDF union)
-                evaluation/ (golden set, frozen predictions, results)
-                examples/ (response cases for the answer-handling study)
-data/           corpus.jsonl (3,985 derived dyads for retrieval)
-```
-
 ## Sources
 
 - Customer Support on Twitter, Kaggle   (`thoughtvector/customer-support-on-twitter`) — primary data; subsampled   per the assignment. Download separately if rebuilding the corpus; not required to run this package.
