@@ -22,7 +22,7 @@ Hybrid intent classifier (word+char TF-IDF 58,104 dims + MiniLM 384d → logisti
 
 ## 4. Evaluation Methodology
 
-Golden 200 reserved strictly for evaluation (never trained/selected/tuned on); customer-disjoint development split; strict golden-customer reruns; single frozen evaluation pass per configuration; Wilson intervals throughout. Response study uses a separate 180-case set with automated validator/escalation diagnostics only — no human annotations exist, so no human quality numbers are reported anywhere.
+Golden 200 reserved strictly for evaluation (never trained/selected/tuned on); customer-disjoint development split; strict golden-customer reruns; single frozen evaluation pass per configuration; Wilson intervals throughout. Response study uses a separate 180-case set with automated validator/escalation diagnostics only - no human annotations exist, so no human quality numbers are reported anywhere.
 
 ## 5. Results
 
@@ -38,7 +38,7 @@ Hybrid leads on accuracy, macro, and weighted F1 with the largest macro gain obs
 
 ## 6. Historical Resolution Grounding
 
-Retrieval returns full dyads with provenance; the gate rejects identifier-bearing, booking-specific, non-generalizable event, and action-less chatter evidence while flagging URLs, event periods, stale content, and numeric artifacts. Historical evidence is applicability-filtered material, never proof of current policy — the corpus is from 2017.
+Retrieval returns full dyads with provenance; the gate rejects identifier-bearing, booking-specific, non-generalizable event, and action-less chatter evidence while flagging URLs, event periods, stale content, and numeric artifacts. Historical evidence is applicability-filtered material, never proof of current policy - the corpus is from 2017.
 
 ## 7. Response and Escalation Behavior
 
@@ -54,11 +54,7 @@ Fallback quotes the top same-intent actionable sentence verbatim with staleness 
 
 ## 9. What Is Misleading About My Headline Number?
 
-69.0% is intent-label agreement on 200 curated messages — not customers receiving good answers. n=200: the CI (62.3–75.0) overlaps every variant, so the ranking is suggestive, not proven. Class imbalance (feedback 44 vs delay 8) skews macro F1; rare classes swing on 1–2 examples. Training labels are noisy keyword rules (agreement ≠ accuracy). Dyad-overlap sensitivity is ~zero but author-style leakage can't be excluded. 2017 data cannot establish current policy. Retrieval applicability is not correctness today. Validator pass rates are guardrail mechanics, not response quality. 100% escalation is conservative safety behavior, not successful automation. No satisfaction, production, or human-agreement claim is made anywhere.
-
-## 10. What I Would Do With One More Week
-
-Blind-human annotation rounds (response set first); calibration of the escalation threshold on human data; validity-syntax and established-state features; a capable instruction model under the frozen validators; a live policy source to replace 2017 staleness.
+69.0% is intent-label agreement on 200 curated messages - not customers receiving good answers. n=200: the CI (62.3–75.0) overlaps every variant, so the ranking is suggestive, not proven. Class imbalance (feedback 44 vs delay 8) skews macro F1; rare classes swing on 1–2 examples. Training labels are noisy keyword rules (agreement ≠ accuracy). Dyad-overlap sensitivity is ~zero but author-style leakage can't be excluded. 2017 data cannot establish current policy. Retrieval applicability is not correctness today. Validator pass rates are guardrail mechanics, not response quality. 100% escalation is conservative safety behavior, not successful automation. No satisfaction, production, or human-agreement claim is made anywhere.
 
 ## 11. Decisions
 
@@ -82,5 +78,4 @@ Blind-human annotation rounds (response set first); calibration of the escalatio
 
 ## 12. Limitations and Evidence Boundaries
 
-Demonstrated: intent classification to 0.69 ± 0.06, leakage-audited
-retrieval with provenance, deterministic safety gating, honest abstention. Not demonstrated: response quality, human agreement, current-policy correctness, satisfaction, production performance. Every number above traces to a frozen artifact; nothing is quoted without provenance.
+Demonstrated: intent classification to 0.69 ± 0.06, leakage-audited retrieval with provenance, deterministic safety gating, honest abstention. Not demonstrated: response quality, human agreement, current-policy correctness, satisfaction, production performance. Every number above traces to a frozen artifact; nothing is quoted without provenance.
